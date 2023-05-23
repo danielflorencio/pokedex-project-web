@@ -4,6 +4,7 @@ import { Box, Flex, Input, InputGroup, InputLeftElement, Text } from '@chakra-ui
 import { Search2Icon } from '@chakra-ui/icons'
 import PokemonList from './components/pokemonList'
 import {CgPokemon} from 'react-icons/cg'
+import InfoCard from './components/infoCard'
 
 function App() {
 
@@ -34,7 +35,7 @@ function App() {
           </InputLeftElement>
           <Input placeholder={`Search by ${isSearchByName}`} bg='white' borderRadius='22px' size='md' variant='outline' value={searchInputField} onChange={(e) => {e.preventDefault(); setSearchInputField(e.target.value)}}/>
           </InputGroup>
-          <Box bg='#ffffff' ml={4} borderColor='#e2e8f0' borderWidth='1px' display='flex' borderRadius='22px' alignItems='center' justifyContent='center' paddingX={5}>
+          <Box onClick={handleSearchTypeChange} cursor={'pointer'} bg='#ffffff' ml={4} borderColor='#e2e8f0' borderWidth='1px' display='flex' borderRadius='22px' alignItems='center' justifyContent='center' paddingX={5}>
             <Text color={'gray.400'} fontSize={22}>#</Text>
           </Box>
           </Flex>
@@ -45,7 +46,7 @@ function App() {
         <PokemonList/>
       </Box>
       </Box>
-
+      <InfoCard></InfoCard>
 
     </Box>  
   )
