@@ -25,11 +25,9 @@ function App() {
   const searchPokemon = async (e: React.FormEvent<HTMLFormElement>) => {   
     e.preventDefault();
       (async () => {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchInputField.toLowerCase()}`, {
-          method: 'GET'
-        })
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchInputField.toLowerCase()}`, {method: 'GET'})
         const data = await response.json();
-        console.log('RESPONSE RECEIVED ON SEARCH FROM THE API: ', data)
+        
         setPokemonList([{name: data.name, id: data.id, pokemonImgUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id.toString()}.png`}])
       })();      
   }
@@ -72,11 +70,9 @@ function App() {
         </Box>
       </Box>
       <Box width='90%' bg='#ffffff' borderRadius={6} borderWidth={'1px'} borderColor={'#dc0a2d'} minHeight='300px' dropShadow='2xl' padding={4}>
-        {/* <PokemonList pokemonList={pokemons}/> */}
         {renderedComponent}
       </Box>
       </Box>
-      {/* <InfoCard/> */}
     </Box>  
   )
 }

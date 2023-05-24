@@ -17,22 +17,15 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen}: InfoC
  
     useEffect(() => {
         (async () => {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`, {
-                method: 'GET'
-            })
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`, {method: 'GET'})
             const data = await response.json();
 
-            console.log('INFOCARD DATA: ')
-
-            const colorResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`, {
-                method: 'GET'
-            })
+            const colorResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`, {method: 'GET'})
             const colorData = await colorResponse.json();
 
-            const descriptionResponse = await fetch(`https://pokeapi.co/api/v2/characteristic/${pokemonId}/`, {
-                method: 'GET'
-            })
+            const descriptionResponse = await fetch(`https://pokeapi.co/api/v2/characteristic/${pokemonId}/`, {method: 'GET'})
             const descriptionData = await descriptionResponse.json();
+            
             const newDescriptionData = descriptionData.descriptions.find(description => description.language.name === 'en');
 
             console.log('Pokemon being received on InfoCard data fetching: ', data)
@@ -59,7 +52,7 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen}: InfoC
             <Box display={'flex'} justifyContent={'space-between'} paddingTop={2} pr={2} >
                 <Box display={'flex'} gap={3}>
                 <ChevronLeftIcon width={'32px'} height={'32px'} cursor={'pointer'} onClick={handleReturnToInitialScreen}/>
-                <Text fontWeight={'bold'}>{myPokemon?.name}</Text>
+                <Text fontWeight={'bold'}>{myPokemon?.name && myPokemon.name[0].toUpperCase() + myPokemon.name.slice(1, myPokemon.name.length)}</Text>
                 </Box>
                 <Text fontWeight={'bold'}>#{myPokemon?.id}</Text>
             </Box>
@@ -67,7 +60,7 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen}: InfoC
             <Box bg={'white'} minHeight={'70%'} borderRadius={'8px'} width='100%' display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                 <Characteristics weight={myPokemon?.weight} height={myPokemon?.height} pokemonId={myPokemon?.id} moves={myPokemon?.moves}/>
                 <Box my={6}>
-                    <Text>{myPokemon?.description}</Text>
+                    <Text>{myPokemon?.description}.</Text>
                 </Box>
                 <Stats hp={myPokemon?.hp} att={myPokemon?.att} def={myPokemon?.def} spd={myPokemon?.spd} satk={myPokemon?.satk} sdef={myPokemon?.sdef} />
             </Box>
