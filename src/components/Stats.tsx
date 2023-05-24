@@ -12,7 +12,7 @@ type PokemonStatsProps = {
 export default function Stats({hp, att, def, satk, sdef, spd}: PokemonStatsProps){
     return(
         <Box width={'90%'} display={'flex'} alignItems={'center'} justifyContent={'center'} flexDirection={'column'}>
-            <Text>Base Stats</Text>
+            <Text fontWeight={'bold'}>Base Stats</Text>
             <Box display={'flex'} width='100%' justifyContent={'center'} alignItems={'center'}>
                 <Box>
                     <Text fontWeight={'bold'}>HP</Text>
@@ -27,29 +27,29 @@ export default function Stats({hp, att, def, satk, sdef, spd}: PokemonStatsProps
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
                             <Text>{hp}</Text>
-                            <Progress colorScheme='green' height='4px' value={hp} borderRadius={4} width={'80%'} />
+                            <Progress colorScheme='green' height='4px' textAlign={'left'} value={hp} borderRadius={4} width={'80%'} />
                         </Stack>
                     </Box>
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
                             <Text >{att}</Text>
-                            <Progress colorScheme='green' height='4px' value={att} borderRadius={4} width={'80%'} />
+                            <Progress colorScheme='green' height='4px' textAlign={'left'} value={att} borderRadius={4} width={'80%'} />
                         </Stack>
                     </Box>
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
                             <Text>{def}</Text>
-                            <Progress colorScheme='green' height='4px' value={def} borderRadius={4} width={'80%'} />
+                            <Progress colorScheme='green' height='4px' textAlign={'left'} value={def} borderRadius={4} width={'80%'} />
                         </Stack>
                     </Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
                             <Text >{satk}</Text>
-                            <Progress colorScheme='green' height='4px' value={satk} borderRadius={4} width={'80%'} />
+                            <Progress colorScheme='green' height='4px' textAlign={'left'} value={satk} borderRadius={4} width={'80%'} />
                         </Stack>
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
                             <Text >{sdef}</Text>
-                            <Progress colorScheme='green' height='4px' value={sdef} borderRadius={4} width={'80%'} />
+                            <Progress colorScheme='green' height='4px' textAlign={'left'} value={sdef} borderRadius={4} width={'80%'} />
                         </Stack>
                     </Box>
                     <Box>

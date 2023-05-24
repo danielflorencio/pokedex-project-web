@@ -1,5 +1,4 @@
 import { Box, Text } from "@chakra-ui/react";
-import { MyPokemon } from "../data/pokemons";
 import {ChevronLeftIcon} from '@chakra-ui/icons'
 import Stats from "./Stats";
 import Characteristics from "./Characteristics";
@@ -7,11 +6,12 @@ import { useEffect, useState } from "react";
 import { Pokemon } from "../types/pokemon";
 
 type InfoCardProps = {
-    pokemonId: string, 
-    handleReturnToInitialScreen: () => void
+    pokemonId: number, 
+    handleReturnToInitialScreen: () => void,
+    handlePokemonChoice: (pokemonId: number) => void
 }
 
-export default function InfoCard({pokemonId, handleReturnToInitialScreen}: InfoCardProps){
+export default function InfoCard({pokemonId, handleReturnToInitialScreen, handlePokemonChoice}: InfoCardProps){
 
     const [myPokemon, setMyPokemon] = useState<Pokemon>();
  
@@ -25,8 +25,9 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen}: InfoC
 
             const descriptionResponse = await fetch(`https://pokeapi.co/api/v2/characteristic/${pokemonId}/`, {method: 'GET'})
             const descriptionData = await descriptionResponse.json();
-            
-            const newDescriptionData = descriptionData.descriptions.find(description => description.language.name === 'en');
+
+            // The code below looks through all the descriptions from the API, and then return only the one that's in english.
+            const newDescriptionData = descriptionData.descriptions.find((description: any) => description.language.name === 'en');
 
             console.log('Pokemon being received on InfoCard data fetching: ', data)
             setMyPokemon({
@@ -45,17 +46,35 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen}: InfoC
                 description: newDescriptionData.description
             })
         })();
-    }, [])
+    }, [pokemonId])
+
+    // const handlePokemonOnScreenChange = (action: 'left' | 'right') => {
+    //     switch(action){
+    //         case 'left':
+    //             pokemonId
+    //     }
+    // }
 
     return(
         <Box height={580} width={380} bg={`${myPokemon?.colorTheme === null || undefined ? ('#38a169') : (myPokemon?.colorTheme)}`} padding={2} borderRadius={'8px'} display={'flex'} flexDirection={'column'} justifyContent={'space-between'} margin={'auto'}>
             <Box display={'flex'} justifyContent={'space-between'} paddingTop={2} pr={2} >
                 <Box display={'flex'} gap={3}>
-                <ChevronLeftIcon width={'32px'} height={'32px'} cursor={'pointer'} onClick={handleReturnToInitialScreen}/>
-                <Text fontWeight={'bold'}>{myPokemon?.name && myPokemon.name[0].toUpperCase() + myPokemon.name.slice(1, myPokemon.name.length)}</Text>
+                    <ChevronLeftIcon width={'32px'} height={'32px'} cursor={'pointer'} color={'#ffffff'} onClick={handleReturnToInitialScreen}/>
+
+                    {/* 
+                    The code in the element below is responsible for showing the pokemon's name correctly.
+                    It verifies if the pokemon's name exists, and if the name exists, it returns two strings.
+                    The first string is only the first letter of the name, but in upper case.
+                    The second string composes the rest of the pokemon's name, starting from index one till the pokemon's string's length.
+                    */}
+
+                    <Text fontWeight={'bold'} color={'#ffffff'} fontSize={'1.3rem'}>{myPokemon?.name && myPokemon.name[0].toUpperCase() + myPokemon.name.slice(1, myPokemon.name.length)}</Text>
                 </Box>
-                <Text fontWeight={'bold'}>#{myPokemon?.id}</Text>
+                <Text fontWeight={'bold'} color={'#ffffff'}>#{myPokemon?.id}</Text>
             </Box>
+
+            <Text onClick={() => handlePokemonChoice(pokemonId - 1)}>TESTE ESQUERDA</Text>
+            <Text onClick={() => handlePokemonChoice(pokemonId + 1)}>TEST DIREITA</Text>
             
             <Box bg={'white'} minHeight={'70%'} borderRadius={'8px'} width='100%' display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                 <Characteristics weight={myPokemon?.weight} height={myPokemon?.height} pokemonId={myPokemon?.id} moves={myPokemon?.moves}/>

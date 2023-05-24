@@ -6,7 +6,7 @@ type PokemonCharacteristicsProps = {
     weight?: number,
     height?: number, 
     moves?: string[],
-    pokemonId?: string,
+    pokemonId?: number,
 }
 
 export default function Characteristics({weight, height, moves, pokemonId}: PokemonCharacteristicsProps){

@@ -2,7 +2,7 @@ import { PokeType } from "./pokeType"
 
 export type Pokemon = {
     pokemonImgUrl?: string,
-    id: string,
+    id: number,
     name: string,
     description?: string,
     moves?: string[], 

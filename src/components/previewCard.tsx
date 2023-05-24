@@ -3,8 +3,8 @@ import { Pokemon } from "../types/pokemon";
 
 type PreviewCardProps = {
     pokemon: Pokemon, 
-    handlePokemonChoice?: (pokemonId: string) => void,
-    id: string
+    handlePokemonChoice?: (pokemonId: number) => void,
+    id: number
 }
 
 export default function PreviewCard({pokemon, handlePokemonChoice, id}: PreviewCardProps){

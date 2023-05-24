@@ -36,14 +36,21 @@ function App() {
     setRenderedComponent(<PokemonList pokemonToSearch='default' pokemonList={pokemonList} setPokemonList={setPokemonList} handlePokemonChoice={handlePokemonChoice}/>)
   }, [pokemonList])
 
-  const handlePokemonChoice = async (pokemonId: string) => {
-    setRenderedComponent(<InfoCard pokemonId={pokemonId} handleReturnToInitialScreen={handleReturnToInitialScreen}/>)
+  const handlePokemonChoice = async (pokemonId: number) => {
+    setRenderedComponent(<InfoCard pokemonId={pokemonId} handleReturnToInitialScreen={handleReturnToInitialScreen} handlePokemonChoice={handlePokemonChoice}/>)
   }
 
   const handleReturnToInitialScreen = () => {
     setRenderedComponent(<PokemonList pokemonToSearch='default' pokemonList={pokemonList} setPokemonList={setPokemonList} handlePokemonChoice={handlePokemonChoice}/>)
   }
   
+  // const handlePokemonOnScreenChange = (action: 'left' | 'right') => {
+  //   switch(action){
+  //     case 'left':
+  //       pokemon
+  //   }
+  // }
+
   return (
     <Box bg='#dc0a2d' minHeight='100vh' width='100vw' pt={6} display='flex' justifyContent='center' flexWrap='wrap'>
       <Box width='100%' height='100%' display='flex' flexWrap='wrap' justifyContent={'center'}>
