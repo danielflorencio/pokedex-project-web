@@ -46,15 +46,11 @@ function App() {
 
   const handlePokemonChoice = async (pokemonId: string) => {
     console.log('Handle pokemon choice called. Pokemon Id:', pokemonId)
-    setRenderedComponent(<InfoCard/>)
+    setRenderedComponent(<InfoCard pokemonId={pokemonId} handleReturnToInitialScreen={handleReturnToInitialScreen}/>)
   }
 
   const handleReturnToInitialScreen = () => {
-
-  }
-
-  const handleReturnToFirstScreen = async () => {
-
+    setRenderedComponent(<PokemonList pokemonToSearch='default' pokemonList={pokemonList} setPokemonList={setPokemonList} handlePokemonChoice={handlePokemonChoice}/>)
   }
   
   return (

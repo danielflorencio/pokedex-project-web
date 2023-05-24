@@ -1,9 +1,15 @@
 import { Box, Divider, Progress, Stack, Text } from "@chakra-ui/react";
-import { MyPokemon } from "../data/pokemons";
 
-console.log('pokemon color ', MyPokemon.colorTheme)
+type PokemonStatsProps = {
+    hp?: number,
+    att?: number, 
+    def?: number, 
+    satk?: number,
+    sdef?: number, 
+    spd?: number
+}
 
-export default function Stats(){
+export default function Stats({hp, att, def, satk, sdef, spd}: PokemonStatsProps){
     return(
         <Box width={'90%'} display={'flex'} alignItems={'center'} justifyContent={'center'} flexDirection={'column'}>
             <Text>Base Stats</Text>
@@ -20,36 +26,36 @@ export default function Stats(){
                 <Box width={'100%'}>
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
-                            <Text >{MyPokemon.hp}</Text>
-                            <Progress colorScheme='green' height='4px' value={MyPokemon.hp} borderRadius={4} width={'80%'} />
+                            <Text>{hp}</Text>
+                            <Progress colorScheme='green' height='4px' value={hp} borderRadius={4} width={'80%'} />
                         </Stack>
                     </Box>
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
-                            <Text >{MyPokemon.att}</Text>
-                            <Progress colorScheme='green' height='4px' value={MyPokemon.att} borderRadius={4} width={'80%'} />
+                            <Text >{att}</Text>
+                            <Progress colorScheme='green' height='4px' value={att} borderRadius={4} width={'80%'} />
                         </Stack>
                     </Box>
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
-                            <Text >{MyPokemon.def}</Text>
-                            <Progress colorScheme='green' height='4px' value={MyPokemon.def} borderRadius={4} width={'80%'} />
+                            <Text>{def}</Text>
+                            <Progress colorScheme='green' height='4px' value={def} borderRadius={4} width={'80%'} />
                         </Stack>
                     </Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
-                            <Text >{MyPokemon.satk}</Text>
-                            <Progress colorScheme='green' height='4px' value={MyPokemon.satk} borderRadius={4} width={'80%'} />
+                            <Text >{satk}</Text>
+                            <Progress colorScheme='green' height='4px' value={satk} borderRadius={4} width={'80%'} />
                         </Stack>
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
-                            <Text >{MyPokemon.sdef}</Text>
-                            <Progress colorScheme='green' height='4px' value={MyPokemon.sdef} borderRadius={4} width={'80%'} />
+                            <Text >{sdef}</Text>
+                            <Progress colorScheme='green' height='4px' value={sdef} borderRadius={4} width={'80%'} />
                         </Stack>
                     </Box>
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
-                            <Text >{MyPokemon.spd}</Text>
-                            <Progress colorScheme='green' height='4px' value={MyPokemon.spd} borderRadius={4} width={'80%'} />
+                            <Text >{spd}</Text>
+                            <Progress colorScheme='green' height='4px' value={spd} borderRadius={4} width={'80%'} />
                         </Stack>
                     </Box>
                 </Box>            
