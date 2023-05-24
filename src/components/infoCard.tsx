@@ -16,9 +16,9 @@ export default function infoCard(){
 
             <Box></Box>
             
-            <Box bg={'white'} height={'60%'} borderRadius={'8px'} width='100%' display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
+            <Box bg={'white'} minHeight={'70%'} borderRadius={'8px'} width='100%' display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                 <Characteristics/>
-                <Box>
+                <Box my={6}>
                     <Text>Description</Text>
                 </Box>
                 <Stats/>

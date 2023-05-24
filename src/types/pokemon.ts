@@ -7,6 +7,8 @@ export type Pokemon = {
     moves: string[], 
     colorTheme: string,
     types: PokeType[],
+    weight: string, 
+    height: string,
     hp: number,
     att: number,
     def: number,

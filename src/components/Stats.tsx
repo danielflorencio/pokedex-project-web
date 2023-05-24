@@ -16,7 +16,7 @@ export default function Stats(){
                     <Text fontWeight={'bold'}>SDEF</Text>
                     <Text fontWeight={'bold'}>SPD</Text>
                 </Box>
-                <Divider orientation='vertical' mx={5} height={'100px'} borderColor={'black'}/>
+                <Divider orientation='vertical' mx={5} height={'100%'} borderColor={'black'}/>
                 <Box width={'100%'}>
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>

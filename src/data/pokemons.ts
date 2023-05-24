@@ -1,2 +1,2 @@
 import { Pokemon } from "../types/pokemon"
-export const MyPokemon: Pokemon = {pokemonImgUrl: 'ImgUrl', id: '#135', name: 'Pokename', colorTheme: '#74cb48', types: [{name: 'Grass', color: 'green'}, {name: 'poison', color: 'purple'}] ,hp: 45, att: 32, def: 38, satk: 45, sdef: 50, spd: 89, moves: ['Att 1', 'Att 2']}
+export const MyPokemon: Pokemon = {pokemonImgUrl: 'ImgUrl', id: '#135', name: 'Pokename', colorTheme: '#74cb48', types: [{name: 'Grass', color: 'green'}, {name: 'poison', color: 'purple'}], weight: '6.9 kg', height: '0.7 m', hp: 45, att: 32, def: 38, satk: 45, sdef: 50, spd: 89, moves: ['Att 1', 'Att 2']}
