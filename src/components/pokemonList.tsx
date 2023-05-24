@@ -1,14 +1,10 @@
-import { useState } from "react";
 import { Pokemon } from "../types/pokemon";
 import PreviewCard from "./previewCard";
-import { MyPokemon } from "../data/pokemons";
 import { Box } from "@chakra-ui/react";
-export default function PokemonList(){
-
-    const [pokemonList, setPokemonList] = useState<Pokemon[]>([MyPokemon, MyPokemon, MyPokemon]);
+export default function PokemonList({pokemonList}: {pokemonList: Pokemon[]}){
 
     return(
-        <Box display='flex' gap={6} flexWrap='wrap'>
+        <Box display='flex' gap={6} flexWrap='wrap' justifyContent={'space-around'}>
             {pokemonList && pokemonList.map((pokemon, index) => 
                 <PreviewCard key={index} pokemon={pokemon}/>
             )}

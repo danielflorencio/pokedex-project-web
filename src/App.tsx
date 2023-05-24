@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { Box, Flex, Input, InputGroup, InputLeftElement, Text } from '@chakra-ui/react'
 import { Search2Icon } from '@chakra-ui/icons'
@@ -12,6 +12,9 @@ function App() {
   const [searchInputField, setSearchInputField] = useState<string>('')
   const [isSearchByName, setIsSearchByName] = useState<'id' | 'name'>('name')
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [renderedComponent, setRenderedComponent] = useState([<PokemonList pokemonList={pokemons}/>, <InfoCard/>])
+  const [renderedComponentId, setRenderedComponentId] = useState(0);
+
 
   const handleSearchTypeChange = () => {
     if(isSearchByName === 'name'){
@@ -21,25 +24,50 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    (async () => {
+      const response = await fetch('https://pokeapi.co/api/v2/pokemon/', {
+        method: 'GET'
+      })
+      const data = await response.json();
+      console.log('DATA RECEIVED ON COMPONENT MOUNT: ', data);
+
+      const newPokemonsState: Pokemon[] = await Promise.all(data.results.map(async (pokemon, index) => {
+        const pokemonResponse = await fetch(pokemon.url);
+        const pokemonData = await pokemonResponse.json();
+  
+        return {
+          name: pokemon.name,
+          id: pokemonData.id.toString(),
+          pokemonImgUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id.toString()}.png`
+        };
+      }));
+
+      console.log('newPokemonState: ', newPokemonsState);
+      setPokemons(newPokemonsState)
+    })();
+  }, [renderedComponent])
+
   const searchPokemon = async (e: React.FormEvent<HTMLFormElement>) => {   
     e.preventDefault();
     console.log('searchPokemon being called.');
+    console.log('searchType: ' , isSearchByName);
       (async () => {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?${isSearchByName}=${searchInputField}`, {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchInputField.toLowerCase()}`, {
           method: 'GET'
         })
         const data = await response.json();
-        console.log('RESPONSE BEING RECEIVED FROM THE API: ', data)
+        console.log('RESPONSE RECEIVED ON SEARCH FROM THE API: ', data)
       })();      
   }
 
-  const handleSearchFormSubmit = async (e: React.FormEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    console.log('form event being called.')
-    // await searchPokemon();
+  const handleChoosePokemon = async (index: number) => {
+    
   }
 
-  // searchPokemon();
+  const handleReturnToFirstScreen = async () => {
+
+  }
   
   return (
     <Box bg='#dc0a2d' minHeight='100vh' width='100vw' pt={6} display='flex' justifyContent='center' flexWrap='wrap'>
@@ -67,11 +95,11 @@ function App() {
         </Box>
       </Box>
       <Box width='90%' bg='#ffffff' borderRadius={6} borderWidth={'1px'} borderColor={'#dc0a2d'} minHeight='300px' dropShadow='2xl' padding={4}>
-        <PokemonList/>
+        {/* <PokemonList pokemonList={pokemons}/> */}
+        {renderedComponent[renderedComponentId]}
       </Box>
       </Box>
-      <InfoCard></InfoCard>
-
+      {/* <InfoCard/> */}
     </Box>  
   )
 }
