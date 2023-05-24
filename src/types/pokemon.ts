@@ -4,6 +4,7 @@ export type Pokemon = {
     pokemonImgUrl?: string,
     id: string,
     name: string,
+    description?: string,
     moves?: string[], 
     colorTheme?: string,
     types?: PokeType[],

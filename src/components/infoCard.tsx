@@ -17,8 +17,6 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen}: InfoC
  
     useEffect(() => {
         (async () => {
-            console.log('INFOCARD BEING RENDERED.')
-
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`, {
                 method: 'GET'
             })
@@ -31,7 +29,11 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen}: InfoC
             })
             const colorData = await colorResponse.json();
 
-            console.log('INFOCARD COLORDATA: ', colorData)
+            const descriptionResponse = await fetch(`https://pokeapi.co/api/v2/characteristic/${pokemonId}/`, {
+                method: 'GET'
+            })
+            const descriptionData = await descriptionResponse.json();
+            const newDescriptionData = descriptionData.descriptions.find(description => description.language.name === 'en');
 
             console.log('Pokemon being received on InfoCard data fetching: ', data)
             setMyPokemon({
@@ -46,7 +48,8 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen}: InfoC
                 sdef: data.stats[4].base_stat,
                 spd: data.stats[5].base_stat,
                 moves: [data.moves[0].move.name, data.moves[1].move.name],
-                colorTheme: colorData.color.name
+                colorTheme: colorData.color.name,
+                description: newDescriptionData.description
             })
         })();
     }, [])
@@ -64,7 +67,7 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen}: InfoC
             <Box bg={'white'} minHeight={'70%'} borderRadius={'8px'} width='100%' display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                 <Characteristics weight={myPokemon?.weight} height={myPokemon?.height} pokemonId={myPokemon?.id} moves={myPokemon?.moves}/>
                 <Box my={6}>
-                    <Text>Description</Text>
+                    <Text>{myPokemon?.description}</Text>
                 </Box>
                 <Stats hp={myPokemon?.hp} att={myPokemon?.att} def={myPokemon?.def} spd={myPokemon?.spd} satk={myPokemon?.satk} sdef={myPokemon?.sdef} />
             </Box>
