@@ -11,8 +11,10 @@ function App() {
 
   const [searchInputField, setSearchInputField] = useState<string>('')
   const [isSearchByName, setIsSearchByName] = useState<'id' | 'name'>('name')
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const [renderedComponent, setRenderedComponent] = useState([<PokemonList pokemonList={pokemons}/>, <InfoCard/>])
+  // const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+  // const [renderedComponent, setRenderedComponent] = useState([<PokemonList pokemonList={pokemons}/>, <InfoCard/>])
+  const [renderedComponent, setRenderedComponent] = useState(<PokemonList pokemonToSearch='default' pokemonList={pokemonList} setPokemonList={setPokemonList}/>)
   const [renderedComponentId, setRenderedComponentId] = useState(0);
 
 
@@ -24,30 +26,6 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    (async () => {
-      const response = await fetch('https://pokeapi.co/api/v2/pokemon/', {
-        method: 'GET'
-      })
-      const data = await response.json();
-      console.log('DATA RECEIVED ON COMPONENT MOUNT: ', data);
-
-      const newPokemonsState: Pokemon[] = await Promise.all(data.results.map(async (pokemon, index) => {
-        const pokemonResponse = await fetch(pokemon.url);
-        const pokemonData = await pokemonResponse.json();
-  
-        return {
-          name: pokemon.name,
-          id: pokemonData.id.toString(),
-          pokemonImgUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id.toString()}.png`
-        };
-      }));
-
-      console.log('newPokemonState: ', newPokemonsState);
-      setPokemons(newPokemonsState)
-    })();
-  }, [renderedComponent])
-
   const searchPokemon = async (e: React.FormEvent<HTMLFormElement>) => {   
     e.preventDefault();
     console.log('searchPokemon being called.');
@@ -58,11 +36,21 @@ function App() {
         })
         const data = await response.json();
         console.log('RESPONSE RECEIVED ON SEARCH FROM THE API: ', data)
+        setPokemonList([{name: data.name, id: data.id, pokemonImgUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id.toString()}.png`}])
       })();      
   }
 
-  const handleChoosePokemon = async (index: number) => {
-    
+  useEffect(() => { // Detects when the pokemonList has changed to force a rerender of the Child component.
+    setRenderedComponent(<PokemonList pokemonToSearch='default' pokemonList={pokemonList} setPokemonList={setPokemonList} handlePokemonChoice={handlePokemonChoice}/>)
+  }, [pokemonList])
+
+  const handlePokemonChoice = async (pokemonId: string) => {
+    console.log('Handle pokemon choice called. Pokemon Id:', pokemonId)
+    setRenderedComponent(<InfoCard/>)
+  }
+
+  const handleReturnToInitialScreen = () => {
+
   }
 
   const handleReturnToFirstScreen = async () => {
@@ -96,7 +84,7 @@ function App() {
       </Box>
       <Box width='90%' bg='#ffffff' borderRadius={6} borderWidth={'1px'} borderColor={'#dc0a2d'} minHeight='300px' dropShadow='2xl' padding={4}>
         {/* <PokemonList pokemonList={pokemons}/> */}
-        {renderedComponent[renderedComponentId]}
+        {renderedComponent}
       </Box>
       </Box>
       {/* <InfoCard/> */}

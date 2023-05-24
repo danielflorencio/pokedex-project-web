@@ -1,9 +1,15 @@
 import { Box, Text } from "@chakra-ui/react";
 import { Pokemon } from "../types/pokemon";
 
-export default function PreviewCard({pokemon}: {pokemon: Pokemon}){
+type PreviewCardProps = {
+    pokemon: Pokemon, 
+    handlePokemonChoice?: (pokemonId: string) => void,
+    id: string
+}
+
+export default function PreviewCard({pokemon, handlePokemonChoice, id}: PreviewCardProps){
     return(
-        <Box position='relative' borderRadius='8px' boxShadow='md' bg='white' height='150px' width='150px' display='flex' flexDirection='column' justifyContent='space-between' cursor={'pointer'}>
+        <Box position='relative' onClick={() => {if(handlePokemonChoice) handlePokemonChoice(id)}} borderRadius='8px' boxShadow='md' bg='white' height='150px' width='150px' display='flex' flexDirection='column' justifyContent='space-between' cursor={'pointer'}>
             <Box textAlign='right' color={'gray.600'} pr={2} pt={2}>
                 #{pokemon.id}
             </Box>
@@ -14,7 +20,6 @@ export default function PreviewCard({pokemon}: {pokemon: Pokemon}){
             <Box textAlign='center' height='40%' borderRadius='8px' bg='gray.200' display={'flex'} alignItems={'center'} justifyContent='center'>
                 <Text position={'absolute'} bottom={'6px'}>{pokemon.name}</Text>
             </Box>
-
         </Box>
     )
 }
