@@ -17,15 +17,21 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen}: InfoC
  
     useEffect(() => {
         (async () => {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId.toLowerCase()}`, {
+            console.log('INFOCARD BEING RENDERED.')
+
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`, {
                 method: 'GET'
             })
             const data = await response.json();
 
-            const colorResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-color/${pokemonId.toLowerCase()}/`, {
+            console.log('INFOCARD DATA: ')
+
+            const colorResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`, {
                 method: 'GET'
             })
             const colorData = await colorResponse.json();
+
+            console.log('INFOCARD COLORDATA: ', colorData)
 
             console.log('Pokemon being received on InfoCard data fetching: ', data)
             setMyPokemon({
@@ -40,13 +46,13 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen}: InfoC
                 sdef: data.stats[4].base_stat,
                 spd: data.stats[5].base_stat,
                 moves: [data.moves[0].move.name, data.moves[1].move.name],
-                colorTheme: colorData.name
+                colorTheme: colorData.color.name
             })
         })();
     }, [])
 
     return(
-        <Box height={580} width={380} bg={`${myPokemon !== null || undefined ? (myPokemon?.colorTheme) : ('green')}`} padding={2} borderRadius={'8px'} display={'flex'} flexDirection={'column'} justifyContent={'space-between'} margin={'auto'}>
+        <Box height={580} width={380} bg={`${myPokemon?.colorTheme === null || undefined ? ('#38a169') : (myPokemon?.colorTheme)}`} padding={2} borderRadius={'8px'} display={'flex'} flexDirection={'column'} justifyContent={'space-between'} margin={'auto'}>
             <Box display={'flex'} justifyContent={'space-between'} paddingTop={2} pr={2} >
                 <Box display={'flex'} gap={3}>
                 <ChevronLeftIcon width={'32px'} height={'32px'} cursor={'pointer'} onClick={handleReturnToInitialScreen}/>

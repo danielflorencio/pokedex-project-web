@@ -11,12 +11,8 @@ function App() {
 
   const [searchInputField, setSearchInputField] = useState<string>('')
   const [isSearchByName, setIsSearchByName] = useState<'id' | 'name'>('name')
-  // const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-  // const [renderedComponent, setRenderedComponent] = useState([<PokemonList pokemonList={pokemons}/>, <InfoCard/>])
   const [renderedComponent, setRenderedComponent] = useState(<PokemonList pokemonToSearch='default' pokemonList={pokemonList} setPokemonList={setPokemonList}/>)
-  const [renderedComponentId, setRenderedComponentId] = useState(0);
-
 
   const handleSearchTypeChange = () => {
     if(isSearchByName === 'name'){
@@ -28,8 +24,6 @@ function App() {
 
   const searchPokemon = async (e: React.FormEvent<HTMLFormElement>) => {   
     e.preventDefault();
-    console.log('searchPokemon being called.');
-    console.log('searchType: ' , isSearchByName);
       (async () => {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchInputField.toLowerCase()}`, {
           method: 'GET'
@@ -45,7 +39,6 @@ function App() {
   }, [pokemonList])
 
   const handlePokemonChoice = async (pokemonId: string) => {
-    console.log('Handle pokemon choice called. Pokemon Id:', pokemonId)
     setRenderedComponent(<InfoCard pokemonId={pokemonId} handleReturnToInitialScreen={handleReturnToInitialScreen}/>)
   }
 
