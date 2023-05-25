@@ -1,5 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
-import {ChevronLeftIcon} from '@chakra-ui/icons'
+import {ArrowBackIcon, ChevronLeftIcon, ChevronRightIcon} from '@chakra-ui/icons'
 import Stats from "./Stats";
 import Characteristics from "./Characteristics";
 import { useEffect, useState } from "react";
@@ -48,18 +48,11 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen, handle
         })();
     }, [pokemonId])
 
-    // const handlePokemonOnScreenChange = (action: 'left' | 'right') => {
-    //     switch(action){
-    //         case 'left':
-    //             pokemonId
-    //     }
-    // }
-
     return(
         <Box height={580} width={380} bg={`${myPokemon?.colorTheme === null || undefined ? ('#38a169') : (myPokemon?.colorTheme)}`} padding={2} borderRadius={'8px'} display={'flex'} flexDirection={'column'} justifyContent={'space-between'} margin={'auto'}>
             <Box display={'flex'} justifyContent={'space-between'} paddingTop={2} pr={2} >
                 <Box display={'flex'} gap={3}>
-                    <ChevronLeftIcon width={'32px'} height={'32px'} cursor={'pointer'} color={'#ffffff'} onClick={handleReturnToInitialScreen}/>
+                    <ArrowBackIcon width={'32px'} height={'32px'} cursor={'pointer'} color={'#ffffff'} onClick={handleReturnToInitialScreen}/>
 
                     {/* 
                     The code in the element below is responsible for showing the pokemon's name correctly.
@@ -73,11 +66,13 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen, handle
                 <Text fontWeight={'bold'} color={'#ffffff'}>#{myPokemon?.id}</Text>
             </Box>
 
-            <Text onClick={() => handlePokemonChoice(pokemonId - 1)}>TESTE ESQUERDA</Text>
-            <Text onClick={() => handlePokemonChoice(pokemonId + 1)}>TEST DIREITA</Text>
-            
+            {/* <Box position={'absolute'} bottom={60} display={'flex'} justifyContent={'space-between'}>
+                <ChevronLeftIcon width={'26x'} height={'26px'} cursor={'pointer'} color={'#ffffff'} onClick={() => handlePokemonChoice(pokemonId - 1)}/>
+                <ChevronRightIcon width={'26px'} height={'26px'} cursor={'pointer'} color={'#ffffff'} onClick={() => handlePokemonChoice(pokemonId + 1)}/>
+            </Box> */}
+
             <Box bg={'white'} minHeight={'70%'} borderRadius={'8px'} width='100%' display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
-                <Characteristics weight={myPokemon?.weight} height={myPokemon?.height} pokemonId={myPokemon?.id} moves={myPokemon?.moves}/>
+                <Characteristics weight={myPokemon?.weight} height={myPokemon?.height} pokemonId={myPokemon?.id} moves={myPokemon?.moves} handlePokemonChoice={handlePokemonChoice}/>
                 <Box my={6}>
                     <Text>{myPokemon?.description}.</Text>
                 </Box>
