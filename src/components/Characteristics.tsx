@@ -23,9 +23,6 @@ export default function Characteristics({weight, height, moves, pokemonId, handl
                 <Box position={'absolute'} bottom={'80px'} display={'flex'} justifyContent={'space-between'} width={'100%'}>
                     {pokemonId && pokemonId > 1 ? (<ChevronLeftIcon width={'30px'} height={'30px'} cursor={'pointer'} color={'#ffffff'} onClick={() => handlePokemonChoice(Number(pokemonId) - 1)}/>) : (<Text></Text>)}
                     {pokemonId && <ChevronRightIcon width={'30px'} height={'30px'} cursor={'pointer'} color={'#ffffff'} onClick={() => handlePokemonChoice(Number(pokemonId) + 1)}/>}
-
-                    {/* <ChevronLeftIcon width={'26x'} height={'26px'} cursor={'pointer'} color={'#ffffff'} onClick={() => handlePokemonChoice(pokemonId - 1)}/> */}
-                    {/* <ChevronRightIcon width={'26px'} height={'26px'} cursor={'pointer'} color={'#ffffff'} onClick={() => handlePokemonChoice(pokemonId + 1)}/> */}
                 </Box>
             </Box>
 

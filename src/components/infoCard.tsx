@@ -1,6 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
-import {ArrowBackIcon, ChevronLeftIcon, ChevronRightIcon} from '@chakra-ui/icons'
+import {ArrowBackIcon} from '@chakra-ui/icons'
 import Stats from "./Stats";
+import {CgPokemon} from 'react-icons/cg'
 import Characteristics from "./Characteristics";
 import { useEffect, useState } from "react";
 import { Pokemon } from "../types/pokemon";
@@ -30,6 +31,9 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen, handle
             const newDescriptionData = descriptionData.descriptions.find((description: any) => description.language.name === 'en');
 
             console.log('Pokemon being received on InfoCard data fetching: ', data)
+            console.log('pokemon.type: ', data.types)
+            console.log('data.types[0].name', data.types[0].type.name)
+
             setMyPokemon({
                 name: data.name, 
                 id: pokemonId, 
@@ -49,7 +53,8 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen, handle
     }, [pokemonId])
 
     return(
-        <Box height={580} width={380} bg={`${myPokemon?.colorTheme === null || undefined ? ('#38a169') : (myPokemon?.colorTheme)}`} padding={2} borderRadius={'8px'} display={'flex'} flexDirection={'column'} justifyContent={'space-between'} margin={'auto'}>
+        <Box height={580} position={'relative'} width={380} bg={`${myPokemon?.colorTheme === null || undefined ? ('#38a169') : (myPokemon?.colorTheme)}`} padding={2} borderRadius={'8px'} display={'flex'} flexDirection={'column'} justifyContent={'space-between'} margin={'auto'}>
+            <CgPokemon size={160} style={{position: 'absolute', color: 'white', right: '30px', opacity: 0.3}}/>
             <Box display={'flex'} justifyContent={'space-between'} paddingTop={2} pr={2} >
                 <Box display={'flex'} gap={3}>
                     <ArrowBackIcon width={'32px'} height={'32px'} cursor={'pointer'} color={'#ffffff'} onClick={handleReturnToInitialScreen}/>
@@ -63,7 +68,7 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen, handle
 
                     <Text fontWeight={'bold'} color={'#ffffff'} fontSize={'1.3rem'}>{myPokemon?.name && myPokemon.name[0].toUpperCase() + myPokemon.name.slice(1, myPokemon.name.length)}</Text>
                 </Box>
-                <Text fontWeight={'bold'} color={'#ffffff'}>#{myPokemon?.id}</Text>
+                <Text fontWeight={'bold'} color={'#ffffff'}>#{myPokemon && String(myPokemon.id).padStart(3, '0')}</Text>
             </Box>
 
             {/* <Box position={'absolute'} bottom={60} display={'flex'} justifyContent={'space-between'}>

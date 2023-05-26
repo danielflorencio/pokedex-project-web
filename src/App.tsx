@@ -25,10 +25,26 @@ function App() {
   const searchPokemon = async (e: React.FormEvent<HTMLFormElement>) => {   
     e.preventDefault();
       (async () => {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchInputField.toLowerCase()}`, {method: 'GET'})
-        const data = await response.json();
-        
-        setPokemonList([{name: data.name, id: data.id, pokemonImgUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id.toString()}.png`}])
+        if(searchInputField !== ''){
+          const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchInputField.toLowerCase()}`, {method: 'GET'})
+          const data = await response.json();
+          setPokemonList([{name: data.name, id: data.id, pokemonImgUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id.toString()}.png`}])
+        } else {
+          const response = await fetch(`https://pokeapi.co/api/v2/pokemon/`, {method: 'GET'})
+          const data = await response.json();
+
+          const newPokemonsState: Pokemon[] = await Promise.all(data.results.map(async (pokemon: any) => {
+            const pokemonResponse = await fetch(pokemon.url);
+            const pokemonData = await pokemonResponse.json();
+      
+            return {
+              name: pokemon.name,
+              id: pokemonData.id.toString(),
+              pokemonImgUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id.toString()}.png`
+            };
+          }));
+          setPokemonList([...newPokemonsState])
+        }
       })();      
   }
 
@@ -43,13 +59,6 @@ function App() {
   const handleReturnToInitialScreen = () => {
     setRenderedComponent(<PokemonList pokemonToSearch='default' pokemonList={pokemonList} setPokemonList={setPokemonList} handlePokemonChoice={handlePokemonChoice}/>)
   }
-  
-  // const handlePokemonOnScreenChange = (action: 'left' | 'right') => {
-  //   switch(action){
-  //     case 'left':
-  //       pokemon
-  //   }
-  // }
 
   return (
     <Box bg='#dc0a2d' minHeight='100vh' width='100vw' pt={6} display='flex' justifyContent='center' flexWrap='wrap'>
@@ -71,7 +80,7 @@ function App() {
           </InputGroup>
           <Box onClick={handleSearchTypeChange} 
           cursor={'pointer'} bg='#ffffff' ml={4} borderColor='#e2e8f0' borderWidth='1px' display='flex' borderRadius='22px' alignItems='center' justifyContent='center' paddingX={5}>
-            <Text color={'gray.400'} fontSize={22}>#</Text>
+            <Text color={isSearchByName === 'name' ? ('gray.400') : ('#0088cc')} fontSize={22}>#</Text>
           </Box>
           </Flex>
         </Box>

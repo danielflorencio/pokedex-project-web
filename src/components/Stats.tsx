@@ -26,35 +26,35 @@ export default function Stats({hp, att, def, satk, sdef, spd}: PokemonStatsProps
                 <Box width={'100%'}>
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
-                            <Text>{hp}</Text>
+                            <Text>{String(hp).padStart(3, '0')}</Text>
                             <Progress colorScheme='green' height='4px' textAlign={'left'} value={hp} borderRadius={4} width={'80%'} />
                         </Stack>
                     </Box>
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
-                            <Text >{att}</Text>
+                            <Text >{String(att).padStart(3, '0')}</Text>
                             <Progress colorScheme='green' height='4px' textAlign={'left'} value={att} borderRadius={4} width={'80%'} />
                         </Stack>
                     </Box>
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
-                            <Text>{def}</Text>
+                            <Text>{String(def).padStart(3, '0')}</Text>
                             <Progress colorScheme='green' height='4px' textAlign={'left'} value={def} borderRadius={4} width={'80%'} />
                         </Stack>
                     </Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
-                            <Text >{satk}</Text>
+                            <Text >{String(satk).padStart(3, '0')}</Text>
                             <Progress colorScheme='green' height='4px' textAlign={'left'} value={satk} borderRadius={4} width={'80%'} />
                         </Stack>
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
-                            <Text >{sdef}</Text>
+                            <Text >{String(sdef).padStart(3, '0')}</Text>
                             <Progress colorScheme='green' height='4px' textAlign={'left'} value={sdef} borderRadius={4} width={'80%'} />
                         </Stack>
                     </Box>
                     <Box>
                         <Stack direction={'row'} align={'center'} spacing={6}>
-                            <Text >{spd}</Text>
+                            <Text >{String(spd).padStart(3, '0')}</Text>
                             <Progress colorScheme='green' height='4px' value={spd} borderRadius={4} width={'80%'} />
                         </Stack>
                     </Box>

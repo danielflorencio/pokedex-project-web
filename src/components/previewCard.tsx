@@ -11,7 +11,7 @@ export default function PreviewCard({pokemon, handlePokemonChoice, id}: PreviewC
     return(
         <Box position='relative' onClick={() => {if(handlePokemonChoice) handlePokemonChoice(id)}} borderRadius='8px' boxShadow='md' bg='white' height='150px' width='150px' display='flex' flexDirection='column' justifyContent='space-between' cursor={'pointer'}>
             <Box textAlign='right' color={'gray.600'} pr={2} pt={2}>
-                #{pokemon.id}
+                #{pokemon.id && String(pokemon.id).padStart(3, '0')}
             </Box>
             <Box position='absolute' top={'16%'} left={'20%'}>
                 <img src={`${pokemon.pokemonImgUrl}`}></img>
