@@ -53,7 +53,7 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen, handle
     }, [pokemonId])
 
     return(
-        <Box height={580} position={'relative'} width={380} bg={`${myPokemon?.colorTheme === null || undefined ? ('#38a169') : (myPokemon?.colorTheme)}`} padding={2} borderRadius={'8px'} display={'flex'} flexDirection={'column'} justifyContent={'space-between'} margin={'auto'}>
+        <Box id="infocard" height={580} position={'relative'} width={380} bg={`${myPokemon?.colorTheme === null || undefined ? ('#38a169') : (myPokemon?.colorTheme)}`} padding={2} borderRadius={'8px'} display={'flex'} flexDirection={'column'} justifyContent={'space-between'} margin={'auto'}>
             <CgPokemon size={160} style={{position: 'absolute', color: 'white', right: '30px', opacity: 0.3}}/>
             <Box display={'flex'} justifyContent={'space-between'} paddingTop={2} pr={2} >
                 <Box display={'flex'} gap={3}>
@@ -68,7 +68,7 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen, handle
 
                     <Text fontWeight={'bold'} color={'#ffffff'} fontSize={'1.3rem'}>{myPokemon?.name && myPokemon.name[0].toUpperCase() + myPokemon.name.slice(1, myPokemon.name.length)}</Text>
                 </Box>
-                <Text fontWeight={'bold'} color={'#ffffff'}>#{myPokemon && String(myPokemon.id).padStart(3, '0')}</Text>
+                <Text id="infocard-pokemon-id" fontWeight={'bold'} color={'#ffffff'}>#{myPokemon && String(myPokemon.id).padStart(3, '0')}</Text>
             </Box>
 
             {/* <Box position={'absolute'} bottom={60} display={'flex'} justifyContent={'space-between'}>

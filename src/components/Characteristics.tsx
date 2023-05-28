@@ -21,8 +21,8 @@ export default function Characteristics({weight, height, moves, pokemonId, handl
                     {pokemonId && <img width={100} height={100} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId.toString()}.png`}></img>}
                 </Box>
                 <Box position={'absolute'} bottom={'80px'} display={'flex'} justifyContent={'space-between'} width={'100%'}>
-                    {pokemonId && pokemonId > 1 ? (<ChevronLeftIcon width={'30px'} height={'30px'} cursor={'pointer'} color={'#ffffff'} onClick={() => handlePokemonChoice(Number(pokemonId) - 1)}/>) : (<Text></Text>)}
-                    {pokemonId && <ChevronRightIcon width={'30px'} height={'30px'} cursor={'pointer'} color={'#ffffff'} onClick={() => handlePokemonChoice(Number(pokemonId) + 1)}/>}
+                    {pokemonId && pokemonId > 1 ? (<ChevronLeftIcon id="left-arrow" width={'30px'} height={'30px'} cursor={'pointer'} color={'#ffffff'} onClick={() => handlePokemonChoice(Number(pokemonId) - 1)}/>) : (<Text></Text>)}
+                    {pokemonId && <ChevronRightIcon id="right-arrow" width={'30px'} height={'30px'} cursor={'pointer'} color={'#ffffff'} onClick={() => handlePokemonChoice(Number(pokemonId) + 1)}/>}
                 </Box>
             </Box>
 

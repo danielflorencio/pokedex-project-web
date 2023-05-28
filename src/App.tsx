@@ -93,7 +93,7 @@ function App() {
           <Input type='text' placeholder={`Search by ${isSearchByName}`} bg='white' borderRadius='22px' size='md' variant='outline' pl={'40px'} value={searchInputField} onChange={(e) => {e.preventDefault(); setSearchInputField(e.target.value)}}/>
           </form>
           </InputGroup>
-          <Box onClick={handleSearchTypeChange} 
+          <Box onClick={handleSearchTypeChange} id="change-search-type-button"
           cursor={'pointer'} bg='#ffffff' ml={4} borderColor='#e2e8f0' borderWidth='1px' display='flex' borderRadius='22px' alignItems='center' justifyContent='center' paddingX={5}>
             <Text color={isSearchByName === 'name' ? ('gray.400') : ('#0088cc')} fontSize={22}>#</Text>
           </Box>
