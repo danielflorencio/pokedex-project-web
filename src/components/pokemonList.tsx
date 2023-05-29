@@ -4,13 +4,12 @@ import PreviewCard from "./previewCard";
 import { Box } from "@chakra-ui/react";
 
 type PokemonListProps = {
-    pokemonToSearch: string, 
     setPokemonList: React.Dispatch<React.SetStateAction<Pokemon[]>>,
     pokemonList: Pokemon[],
     handlePokemonChoice?: (pokemonId: number) => void
 }
 
-export default function PokemonList({pokemonToSearch, setPokemonList, pokemonList, handlePokemonChoice}: PokemonListProps){
+export default function PokemonList({setPokemonList, pokemonList, handlePokemonChoice}: PokemonListProps){
 
   // The following useEffect detects if there are no Pokemons loaded into the pokemonList state.
   // If there are no pokemons loaded into the list, it will make a fetch request to the API to retrieve some pokemon's data.
@@ -18,10 +17,6 @@ export default function PokemonList({pokemonToSearch, setPokemonList, pokemonLis
   useEffect(() => {
       if(pokemonList.length === 0){
           (async () => {
-              let searchParameters: string = '' 
-              if(pokemonToSearch !== 'default'){
-                searchParameters = pokemonToSearch
-              }
 
               const response = await fetch(`https://pokeapi.co/api/v2/pokemon/`, {method: 'GET'})
               const data = await response.json();
@@ -36,7 +31,6 @@ export default function PokemonList({pokemonToSearch, setPokemonList, pokemonLis
                   pokemonImgUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id.toString()}.png`
                 };
               }));
-        
               setPokemonList([...newPokemonsState])
             })();
       }

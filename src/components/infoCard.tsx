@@ -71,11 +71,6 @@ export default function InfoCard({pokemonId, handleReturnToInitialScreen, handle
                 <Text id="infocard-pokemon-id" fontWeight={'bold'} color={'#ffffff'}>#{myPokemon && String(myPokemon.id).padStart(3, '0')}</Text>
             </Box>
 
-            {/* <Box position={'absolute'} bottom={60} display={'flex'} justifyContent={'space-between'}>
-                <ChevronLeftIcon width={'26x'} height={'26px'} cursor={'pointer'} color={'#ffffff'} onClick={() => handlePokemonChoice(pokemonId - 1)}/>
-                <ChevronRightIcon width={'26px'} height={'26px'} cursor={'pointer'} color={'#ffffff'} onClick={() => handlePokemonChoice(pokemonId + 1)}/>
-            </Box> */}
-
             <Box bg={'white'} minHeight={'70%'} borderRadius={'8px'} width='100%' display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                 <Characteristics weight={myPokemon?.weight} height={myPokemon?.height} pokemonId={myPokemon?.id} moves={myPokemon?.moves} handlePokemonChoice={handlePokemonChoice}/>
                 <Box my={6}>

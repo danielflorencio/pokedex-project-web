@@ -12,7 +12,7 @@ function App() {
   const [searchInputField, setSearchInputField] = useState<string>('')
   const [isSearchByName, setIsSearchByName] = useState<'id' | 'name'>('name')
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-  const [renderedComponent, setRenderedComponent] = useState(<PokemonList pokemonToSearch='default' pokemonList={pokemonList} setPokemonList={setPokemonList}/>)
+  const [renderedComponent, setRenderedComponent] = useState(<PokemonList pokemonList={pokemonList} setPokemonList={setPokemonList}/>)
 
   const handleSearchTypeChange = () => {
     if(isSearchByName === 'name'){
@@ -64,7 +64,7 @@ function App() {
   }
 
   useEffect(() => { // Detects when the pokemonList has changed to force a rerender of the Child component.
-    setRenderedComponent(<PokemonList pokemonToSearch='default' pokemonList={pokemonList} setPokemonList={setPokemonList} handlePokemonChoice={handlePokemonChoice}/>)
+    setRenderedComponent(<PokemonList pokemonList={pokemonList} setPokemonList={setPokemonList} handlePokemonChoice={handlePokemonChoice}/>)
   }, [pokemonList])
 
   const handlePokemonChoice = async (pokemonId: number) => {
@@ -72,7 +72,7 @@ function App() {
   }
 
   const handleReturnToInitialScreen = () => {
-    setRenderedComponent(<PokemonList pokemonToSearch='default' pokemonList={pokemonList} setPokemonList={setPokemonList} handlePokemonChoice={handlePokemonChoice}/>)
+    setRenderedComponent(<PokemonList pokemonList={pokemonList} setPokemonList={setPokemonList} handlePokemonChoice={handlePokemonChoice}/>)
   }
 
   return (
